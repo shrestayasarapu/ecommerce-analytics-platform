@@ -25,5 +25,3 @@ resources:
             base_parameters:
               catalog: ${var.catalog_name}
               environment: ${var.environment}
-      max_retries: 2
-      min_retry_interval_millis: 60000
