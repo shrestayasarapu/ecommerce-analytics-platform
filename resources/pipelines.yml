@@ -1,0 +1,12 @@
+resources:
+  pipelines:
+    ecommerce_streaming_pipeline:
+      name: "ecommerce-streaming-pipeline-${var.environment}"
+      catalog: ${var.catalog_name}
+      target: silver_layer
+      continuous: false
+      photon: true
+      development: true
+      libraries:
+        - notebook:
+            path: ../src/dlt_pipelines/streaming_pipeline.py

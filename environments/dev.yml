@@ -1,0 +1,13 @@
+environment: dev
+catalog: ecommerce_analytics_platform_dev
+storage_container: ecommdatasy2026
+compute:
+  autotermination_minutes: 20
+data:
+  source_sample_fraction: 0.05
+  raw_path: abfss://raw-data@ecommdatasy2026.dfs.core.windows.net/
+  checkpoint_path: abfss://checkpoints@ecommdatasy2026.dfs.core.windows.net/
+  quarantine_path: abfss://quarantine@ecommdatasy2026.dfs.core.windows.net/
+job_schedule:
+  bronze_ingestion: "manual"
+  dlt_pipeline: "manual"

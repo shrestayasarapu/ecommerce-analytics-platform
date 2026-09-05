@@ -1,0 +1,29 @@
+resources:
+  jobs:
+    ecommerce_medallion_pipeline:
+      name: "ecommerce-medallion-pipeline-${var.environment}"
+      tasks:
+        - task_key: bronze_ingestion
+          notebook_task:
+            notebook_path: ../src/notebooks/bronze_ingestion.py
+            base_parameters:
+              catalog: ${var.catalog_name}
+              environment: ${var.environment}
+        - task_key: silver_transformation
+          depends_on:
+            - task_key: bronze_ingestion
+          notebook_task:
+            notebook_path: ../src/notebooks/silver_transformation.py
+            base_parameters:
+              catalog: ${var.catalog_name}
+              environment: ${var.environment}
+        - task_key: gold_aggregation
+          depends_on:
+            - task_key: silver_transformation
+          notebook_task:
+            notebook_path: ../src/notebooks/gold_aggregation.py
+            base_parameters:
+              catalog: ${var.catalog_name}
+              environment: ${var.environment}
+      max_retries: 2
+      min_retry_interval_millis: 60000

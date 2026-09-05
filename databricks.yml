@@ -1,0 +1,38 @@
+bundle:
+  name: ecommerce-analytics-platform
+
+variables:
+  catalog_name:
+    description: Unity Catalog catalog name for this environment
+  environment:
+    description: Deployment environment identifier (dev/staging/prod)
+  spn_application_id:
+    description: Service Principal application ID used for job execution
+    default: "e98512cc-c67c-4a8d-a2f9-3a3a2bcbe0ff"
+
+include:
+  - resources/*.yml
+
+targets:
+  dev:
+    default: true
+    mode: development
+    workspace:
+      host: https://adb-7405614328756261.1.azuredatabricks.net
+      root_path: /Workspace/Users/${workspace.current_user.userName}/.bundle/${bundle.name}/dev
+    variables:
+      catalog_name: ecommerce_analytics_platform_dev
+      environment: dev
+    run_as:
+      user_name: ${workspace.current_user.userName}
+
+  prod:
+    mode: production
+    workspace:
+      host: https://adb-7405614328756261.1.azuredatabricks.net
+      root_path: /Bundles/${bundle.name}/prod
+    variables:
+      catalog_name: ecommerce_analytics_platform_prod
+      environment: prod
+    run_as:
+      user_name: ${workspace.current_user.userName}
