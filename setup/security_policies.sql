@@ -1,0 +1,6 @@
+-- =====================================================================
+-- Security & Access Control Setup — Domain 5
+-- Row Level Security, Column Level Security, Dynamic Data Masking,
+-- and Audit Logging policies for the e-commerce analytics platform.
+-- Populated in a later step once Silver/Gold tables are live.
+-- =====================================================================
