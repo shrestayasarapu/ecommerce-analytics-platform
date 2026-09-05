@@ -6,7 +6,7 @@ resources:
       target: silver_layer
       continuous: false
       photon: true
-      development: true
+      development: ${var.is_dev}
       serverless: true
       libraries:
         - notebook:

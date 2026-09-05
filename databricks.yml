@@ -9,6 +9,9 @@ variables:
   spn_application_id:
     description: Service Principal application ID used for job execution
     default: "e98512cc-c67c-4a8d-a2f9-3a3a2bcbe0ff"
+  is_dev:
+    description: Whether the DLT pipeline should run in development mode
+    default: false
 
 include:
   - resources/*.yml
@@ -23,6 +26,7 @@ targets:
     variables:
       catalog_name: ecommerce_analytics_platform_dev
       environment: dev
+      is_dev: true
     run_as:
       user_name: ${workspace.current_user.userName}
 
@@ -34,5 +38,6 @@ targets:
     variables:
       catalog_name: ecommerce_analytics_platform_prod
       environment: prod
+      is_dev: false
     run_as:
       user_name: ${workspace.current_user.userName}
